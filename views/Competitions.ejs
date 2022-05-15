@@ -1,0 +1,222 @@
+<%- include("partials/header") %>
+<!-- <button onclick="window.location.href=''" style="border:none; margin:15px 15px;">Back</button> -->
+
+<script type="text/javascript">
+    function preback(){
+      window.history.forward();
+    }
+    setTimeout("preback()", 0);
+    window.onunload=function(){null};
+  </script>
+  
+
+<style>
+    #back:hover {
+        cursor: pointer;
+    }
+    #back {
+        margin-left: 0.5rem;
+    }
+  </style>
+ <div id="backicon">
+    <i class="fa fa-arrow-left" id="back" aria-hidden="true" style="font-size: 1.5rem; margin-top: 1%;" onclick="window.location.href='/cordhome/<%=fest%>'"></i>
+ </div>
+
+<style>
+    .container{
+        margin:2rem auto 2rem auto;
+        border:2px solid rgb(39, 223, 39);
+        width:40%;
+        border-radius: 0.3rem;
+    }
+    .formcontent{
+        text-align: center;
+        border:2rem solid white;
+    }
+    .select {
+    width:3rem;
+    }
+    .select-holder {
+    height:1.5em;
+    background:#f9f9f9;
+    }
+    .textfield{
+        width:100%;
+        height: 2.7rem;
+    }
+    .textgroup{
+        padding: 1rem 0 1rem 0;
+    }
+    .row{
+        margin:0 0 0 0;
+        width:100%;
+        padding:1rem 0 0 0;
+    }
+    .disable{
+       display: none;
+    }
+</style>
+
+<% let months = new Map();
+    months.set(1,"Jan");
+    months.set(2,"Feb");
+    months.set(3,"Mar");
+    months.set(4,"Apr");
+    months.set(5,"May");
+    months.set(6,"Jun");
+    months.set(7,"Jul");
+    months.set(8,"Aug");
+    months.set(9,"Sep");
+    months.set(10,"Oct");
+    months.set(11,"Nov");
+    months.set(12,"Dec"); %>
+
+ <!-- let days = new Map();
+    days.set(1,"Monday");
+    days.set(2,"Tuesday");
+    days.set(3,"Wednesday");
+    days.set(4,"Thursday");
+    days.set(5,"Friday");
+    days.set(6,"Saturday");
+    days.set(7,"Sunday");  -->
+
+
+<div class="container">
+    <div class="formcontent">
+        <div>
+            <h3 style="font-size: 2rem;">New Event</h3>
+        </div>
+        <div class="inputarea" style="margin: 3.5rem 0  1rem 0;">
+            <form action="/cordhome/<%=fest%>" method="POST">
+                <div class="textgroup">
+                    <input class="textfield" style="border-radius: 0.2rem; border: 1px solid #dadce0" type="text" name="name" placeholder="Name of Event" required>
+                </div>
+
+                <div class="row" style="width:100%; padding-bottom: 1rem;">
+                    <div style="width:50%">
+                        <select  id="events" style="width:95%; border-radius: 0.2rem; border: 1px solid #dadce0; height:2.3rem; float:left;"  name="events" required>
+                        <option value="Event Type" disabled selected>Event type</option>
+                        <option value="competitionss">Competition-single</option>
+                        <option value="competitionsd">Competition-dual</option>
+                        <option value="concerts">Concerts</option>
+                        </select>
+                    </div>
+                    
+                    <div style="width:50%">
+                        <select id="voting" class="disable" style="border-radius: 0.2rem; border: 1px solid #dadce0; width:95%; height:2.3rem; float:right;" name="voting" required>
+                            <option value="Voting" disable selected>Will there be any voting?</option>
+                            <option class="ans" value="no">No</option>
+                            <option class="ans" value="yes">Yes</option>
+                        </select>
+                    </div>  
+                </div>    
+
+                <div style="width:100%; padding:1rem 0 1rem 0">
+                    <% let suffix;
+                    switch((festfrom.getDate())%10) {
+                        case 11: suffix = "th";
+                                    break;
+                        case 1: suffix = "st";
+                                break;
+                        case 2: suffix = "nd";
+                                break;
+                        case 3: suffix = "rd";
+                                break;
+                        default: suffix = "th";
+                    } %>
+                    <%switch((festto.getDate())%10) {
+                        case 11: suffix = "th";
+                                    break;
+                        case 1: suffix = "st";
+                                break;
+                        case 2: suffix = "nd";
+                                break;
+                        case 3: suffix = "rd";
+                                break;
+                        default: suffix = "th";
+                    } %>
+                    <input style="border-radius: 0.2rem; border: 1px solid #dadce0; width:100%; height:2.3rem;" type="date" name="date" title="Date of Event is between <%=festfrom.getDate()%><%=suffix%> <%=months.get(festfrom.getMonth()+1)%> 
+                    <%=festfrom.getFullYear()%> to <%=festto.getDate()%><%=suffix%> <%=months.get(festto.getMonth()+1)%> 
+                    <%=festto.getFullYear()%>" required>
+                </div>
+                
+
+                <div class="row">
+                    <div style="width:50%">Start Time</div>
+                    <div style="width:50%">End Time</div>
+                </div>
+                    
+                <div class="row" style="padding-bottom: 1rem;">
+                    <div class="select-holder" style="width:23%; float:left;">
+                        <select style="border-radius: 0.2rem; border: 1px solid #dadce0" name="shours" class="select" onmousedown="if(this.options.length>6){this.size=6;}"  onchange='this.size=0;' onblur="this.size=0;">
+                            <% for(var i=0;i<24;i++) { %> 
+                                <option value="<%=i%>"><%if(i<10){%>0<%}%><%=i%> </option>
+                            <%} %>
+                        </select>
+                    </div>
+                    <div style="width:4%">:</div>
+                    <div class="select-holder" style="width:23%; float: left;">
+                        <select style="border-radius: 0.2rem; border: 1px solid #dadce0" name="sminutes" class="select" onmousedown="if(this.options.length>6){this.size=6;}"  onchange='this.size=0;' onblur="this.size=0;">
+                            <% for(var i=0;i<60;i++) { %> 
+                                <option value="<%=i%>"><%if(i< 10){%>0<%}%><%=i%></option>
+                            <%}%>
+                        </select>
+                    </div>
+                    
+                    
+                    <div class="select-holder" style="width:23%; float:left;">
+                        <select  style="border-radius: 0.2rem; border: 1px solid #dadce0" name="ehours" class="select" onmousedown="if(this.options.length>6){this.size=6;}"  onchange='this.size=0;' onblur="this.size=0;">
+                            <% for(var i=0;i<24;i++) { %> 
+                                <option value="<%=i%>"><%if(i/10 < 1){%>0<%}%><%=i%> </option>
+                            <%}%>
+                        </select>
+                    </div>
+                    <div style="width:4%">:</div>
+                    <div class="select-holder" style="width:23%; float:left;">
+                        <select style="border-radius: 0.2rem; border: 1px solid #dadce0" name="eminutes" class="select" onmousedown="if(this.options.length>6){this.size=6;}"  onchange='this.size=0;' onblur="this.size=0;">
+                            <% for(var i=0;i<60;i++) { %> 
+                                <option value="<%=i%>"><%if(i/10 < 1){%>0<%}%><%=i%></option>
+                            <%}%>
+                        </select>
+                    </div>
+                
+                </div>
+                
+                <div class="textgroup">
+                    <input class="textfield"  style="border-radius: 0.2rem; border: 1px solid #dadce0" type="text" name="guests" placeholder="Guests">
+                </div>
+
+                <div class="textgroup">
+                    <input class="textfield"  style="border-radius: 0.2rem; border: 1px solid #dadce0" type="text" name="venue" placeholder="Venue" required>
+                </div>
+                
+                <div style="width:100%; padding:1rem 0 1rem 0">
+                    <textarea style="border-radius: 0.2rem;  border: 1px solid #dadce0; resize:none; width:100%" name="description" placeholder="Description" required></textarea>   
+                </div>
+                
+                <div style="padding:1rem 0 1rem 0">
+                    <button class="btn-success" style="border:0; border-radius: 0.2rem; height:2.5rem; width:7rem">Organize!</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+  document.querySelector("#events").addEventListener("change", (e)=>{
+       if(document.querySelector("#events").value=="competitionss")
+       {
+        document.querySelector("#voting").classList.toggle("disable")
+       }
+       else 
+       { 
+         if(document.querySelector("#voting").classList.contains("disable")==false)
+          {    console.log("it is")
+               document.querySelector("#voting").className = "disable";
+          }
+        }
+  })
+  console.log(x)
+</script>
+
+<%- include("partials/footer") %>

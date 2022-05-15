@@ -1,0 +1,44 @@
+<%- include("partials/header") %>
+
+
+<script type="text/javascript">
+  function preback(){
+    window.history.forward();
+  }
+  setTimeout("preback()", 0);
+  window.onunload=function(){null};
+</script>
+
+
+<h1 style="text-align: center; margin-bottom: 5rem;">Live Voting</h1>
+
+<div style="text-align: center;">
+
+<div class="row" style="width:90%; text-align: center; margin:auto auto">
+<%for(var i=0;i<registrations.currentround.length;i++){%>
+  
+        <div class="col-md-4" style="width: 33%; text-align: center;">   
+           <div class="card mb-3 cards" style="width:80%; text-align: center;">
+              <div class="card-header"><%=registrations.currentround[i].name%></div>
+               <div class="card-body">
+                 <h5 class="card-title"><%=registrations.currentround[i].score%></h5>
+               </div>
+           </div>  
+         </div>  
+<%}%>  
+</div>  
+<a class="btn btn-primary" style=" margin-top:2rem; font-size:2rem;height:4rem" href="/cordhome/<%=fest.festname%>/<%=registrations._id%>/voteresults">Stop and Release Results</a>
+</div>
+
+
+
+<script>
+  var colors = ["#ffc107","#17a2b8","#28a745","#6c757d","#dc3545","yellow"];
+
+  var buttons = document.getElementsByClassName("cards")
+  for(var i=0;i<buttons.length;i++){
+       buttons[i].style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];;
+  }
+</script>
+
+<%- include("partials/footer") %>

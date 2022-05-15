@@ -1,0 +1,68 @@
+<%- include("partials/header") %>
+
+
+<script type="text/javascript">
+    function preback(){
+      window.history.forward();
+    }
+    setTimeout("preback()", 0);
+    window.onunload=function(){null};
+  </script>
+
+<style>
+    .container{
+        margin :2rem auto 4rem auto;
+        padding: 0 0 0 0;
+        width: 85%;
+        text-align: center;
+    }
+    .rankcontent{
+        text-align: center;
+        width: 100%;
+        border: 3rem solid white;
+    }
+    .col-md-4{
+        padding: 0 0 0 0;
+    }
+    .row{
+        margin:0 0 0 0;
+        text-align: center;
+    }
+</style>
+
+<style>
+    #back:hover {
+        cursor: pointer;
+    }
+  </style>
+
+<div class="container">
+    <h2>Competition has ended</h2>
+   <div class="rankcontent">   
+        <div class="row" style="background: gold; border-radius: 0.4rem; width:100%; height:8rem">
+            <div class="col-md-4" style="font-size: 5rem;">1st</div>
+            <div class="col-md-4" style="font-size:5rem; height:7rem; overflow: hidden;"><%=doc.result[0].name%></div>  
+            <div class="col-md-4" style="font-size: 5rem">Winner</div>
+        </div>
+        <%if(doc.result.length==2){%>
+        <div class="row" style="height:5rem; background:rgba(245, 109, 46, 0.945); margin:2rem auto 0 auto; padding: 0.5rem 0 0.5rem 0; border-radius: 0.3rem; width:90%">
+            <div class="col-md-4" style="font-size: 2.5rem;">2nd</div>
+            <div class="col-md-4" style="font-size: 2.5rem; height: 4rem; overflow: hidden;"><%=doc.result[1].name%></div>
+            <div class="col-md-4" style="font-size: 2.5rem">Runner Up</div>
+        </div>
+        <%}%>
+       <%if(doc.result.length==3){%>   
+        <div class="row" style="height:3.5rem; background: rgb(139, 236, 12); margin:2rem auto 0 auto; padding:0.5rem 0 0.5rem 0; border-radius: 0.3rem; width:80%">
+            <div class="col-md-4" style="font-size: 1.5rem" >3rd</div>
+            <div class="col-md-4" style="font-size: 1.5rem; height:3rem; overflow: hidden;"><%=doc.result[2].name%></div>
+            <div class="col-md-4" style="font-size: 1.5rem" >Second Runner Up</div>
+        </div>
+       <%}%> 
+    </div>   
+    
+  <div style="font-weight: 400; font-size: 1.5rem;">
+     Thanks
+  </div>
+</div>
+
+<%- include("partials/footer") %>

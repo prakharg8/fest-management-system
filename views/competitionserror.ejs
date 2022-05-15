@@ -1,0 +1,61 @@
+
+<script type="text/javascript">
+    function preback(){
+      window.history.forward();
+    }
+    setTimeout("preback()", 0);
+    window.onunload=function(){null};
+  </script>
+
+<style>
+
+    #error {
+        color: rgb(233, 56, 56);
+        margin: auto auto;
+
+    }
+    
+    .container {
+        /* border: 2px solid black; */
+        align-items: center;
+        align-self: center;
+        /* width: 60%; */
+        /* float: none; */
+        /* clear: both; */
+        margin: 33px 200px;
+        display: flex;
+    }
+
+    #image {
+        display: block;
+        margin-left: 420px;
+        margin-right: auto;
+        height: 280px;
+        width: 450px;
+        /* border-radius: 100px; */
+        /* width: 50%; */
+    }
+    .imge {
+        margin-top: 150px;
+    }
+    #message {
+        color: rgb(92, 207, 92);
+    }
+
+</style>
+
+<style>
+    #back:hover {
+        cursor: pointer;
+    }
+</style>
+
+<div class="container">
+    <h1 id="error">
+        <div style="font-size:5rem; text-align:center; margin:5rem auto 5rem auto;">
+            OOPS!
+        </div> 
+        <span id="message">THE COMPETITION HAS NOT YET STARTED</span>
+    </h1>
+</div>
+

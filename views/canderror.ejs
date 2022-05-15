@@ -1,0 +1,41 @@
+<script type="text/javascript">
+    function preback(){
+      window.history.forward();
+    }
+    setTimeout("preback()", 0);
+    window.onunload=function(){null};
+  </script>
+  
+
+<style>
+
+    #message {                        
+        color: rgb(71, 71, 224);        
+    }
+    .container {
+        /* align-self: center; */
+        margin: 75px auto;
+        text-align: center;
+        /* border: 2px solid black; */
+        width: 70%;
+    }
+    /* img {
+        transform: rotate(90deg);
+        width: 400px;
+        height: 380px;
+    } */
+
+</style>
+
+
+<div class="container">
+
+    <!-- <div>
+        <img src="ds images/Candidates.jpg" alt="Competitors">
+    </div> -->
+    <div style="margin-top: 50px;">
+        <h1>
+            <span id="message">There are not enough candidates to start competition</span>
+        </h1>
+    </div>
+</div>

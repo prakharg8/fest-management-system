@@ -1,0 +1,123 @@
+<%-include("partials/header")%>
+
+
+<script type="text/javascript">
+  function preback(){
+    window.history.forward();
+  }
+  setTimeout("preback()", 0);
+  window.onunload=function(){null};
+</script>
+
+<style>
+  .container{
+    margin:5rem auto 2rem auto;
+    text-align: center;
+  }
+
+  .player1,.player2{
+    width:80%;
+    background: rgb(84, 25, 139);
+    border-radius: 0.4rem;
+  }
+  input:focus{
+    outline:none;
+  }
+  input::placeholder{
+    color: white;
+  }
+  
+  button:focus{
+    outline-style:none !important;
+    box-shadow: none !important;
+  }
+</style>
+
+<style>
+  #back:hover {
+      cursor: pointer;
+  }
+  
+</style>
+<div>
+<form action="/cordhome/<%=fest.festname%>/<%=registrations._id%>/reset" method="POST">
+      <button style="border-radius: 0;" class="btn btn-primary">Reset</button>
+</form>
+</div>
+<%if(start!=0 && start%2==0 && start == registrations.currentcand.length){%>
+ <div class="nextlevel" style="text-align: center; margin:13rem auto 5rem auto;"> 
+  <form action="/cordhome/<%=fest.festname%>/<%=registrations._id%>" method="POST"> 
+      <button class="btn-success" style="font-weight: 450;  font-size:1.5rem; width:25%; height: 4rem;" name="nextlevel" value="nextlevel">Next Level</button>
+  </form>    
+</div>
+<%}else{%>
+ <div class="container"> 
+     <div class="current" style="background:rgb(250, 191, 28); padding:1rem 0 1rem 0; border-radius:0.4rem">
+       <div class="row" style="width:100%; margin:0 0 0 0;"> 
+         <div style="width:40%"> 
+            <div class="player1" style="margin: 0 1rem 0 6rem; width:65%; float:right">
+           <form action="/cordhome/<%=fest.festname%>/<%=registrations._id%>/<%=registrations.currentcand[start]._id%>" method="POST">   
+              <div style="color:orange; height: 2.5rem; padding:0.5rem 0 0.5rem 0; font-weight: 600; font-size:1.2rem;">
+                   <%=registrations.currentcand[start].name%>
+              </div> 
+              
+              <div>
+                <input  placeholder="Enter Score" title="scores of current players should be different" style="width:76.3%; border:0px; background:rgba(142, 78, 202, 0.897); padding:0 0.5rem 0 1rem; height:2.5rem;" type="text" name="score1" required>
+                <button style="width:22.14%; border:0px; background:rgb(124, 60, 184); height:2.5rem;">Arrow</button>
+      
+              </div>  
+           </form>  
+          </div>
+        </div>
+        <div style="width:20%; font-size:4rem; font-weight: 700; padding:0 ">VS</div>
+     
+     
+          <div style="width:40%">
+            <div class="player2"  style="margin: 0 6rem 0 1rem; width:65%; float:left">
+           <form action="/cordhome/<%=fest.festname%>/<%=registrations._id%>/<%=registrations.currentcand[start+1]._id%>" method="POST">
+              <div style="color:orange; height: 2.5rem; padding:0.5rem 0 0.5rem 0; font-weight: 600; font-size:1.2rem;">
+                <%=registrations.currentcand[start+1].name%>
+              </div>
+              <hr style="margin:0 0 0 0">
+              <div>
+                  <span class="inputscore">  
+                    <input placeholder="Enter Score" title="scores of current players should be different" style="width:76.3%; border:0px; background:rgba(142, 78, 202, 0.897); padding:0 0.5rem 0 1rem; height:2.5rem;" type="text" name="score1"type="text" name="score2" required>
+                  </span>
+                  <span>
+                    <button style="width:22.14%; border:0px; background:rgb(124, 60, 184); height:2.5rem;">Arrow</button>
+                  </span>
+             </div>
+           </form>
+           </div>
+           </div>
+    </div>
+  </div>
+     
+     
+  
+    
+     <% var i,n; %>
+     <% n = registrations.currentcand.length;%>     
+    <div class="nextcomp" style="margin-top: 2rem;">
+     <% for(i=start+2;i<n;i+=2) {%> 
+      <div class="row" style="width:100%; margin: 0 0 0 0; text-align: center;">         
+              <div style=" margin:1rem 0 1rem 0; width:45%">
+                <div style="width:50%; font-weight: 600; color:white; font-size: 1.1rem; padding:0.5rem 0 0.5rem 0; background: rgba(199, 23, 23, 0.774); float:right; border-radius: 2rem;">
+                 <%=registrations.currentcand[i].name%>
+                </div>
+              </div>
+              <div style="width:10%; font-size: 2rem;">vs</div>
+              <div style=" margin:1rem 0 1rem 0; width:45%">
+                 <div style="width:50%; font-weight: 600; color:white; font-size: 1.1rem; padding:0.5rem 0 0.5rem 0; background:  rgba(199, 23, 23, 0.774); float:left; border-radius:2rem">
+                   <%=registrations.currentcand[i+1].name%>
+                 </div>  
+             </div>
+      </div>       
+     <%}%>
+    </div>
+    </div>   
+ <%}%> 
+<%-include("partials/footer")%>
+
+<!-- 
+background: rgb(236, 91, 212); -->
